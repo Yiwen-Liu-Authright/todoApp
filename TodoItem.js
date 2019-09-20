@@ -1,7 +1,7 @@
 /*
  * @Comment: Yiwen Liu
  * @Date: 2019-09-19 18:44:08
- * @LastEditTime: 2019-09-20 16:08:38
+ * @LastEditTime: 2019-09-20 16:47:02
  * @Status: Inprocess
  * @Description: Each render <li> version
  */
@@ -13,43 +13,7 @@ for (let i = 0; i < INITIALLIST.length; i++) {
     addTodo(INITIALLIST[i]);
 }
 
-// Press Enter to Add Task
-document.getElementById("newInput").addEventListener('keypress',
-    event => {
-        if (event.keyCode === 13) {
-            this.addTodo(event.target.value);
-        }
-    });
-
-
-let todoList = document.querySelector("UL");
-// Clicked the Task to complete
-todoList.addEventListener('click',
-    event => {
-        if (event.target.tagName === "LI") {
-            event.target.classList.toggle('checked');
-            console.log(`"${event.target.textContent}" is clicked`);
-        }
-    }, false);
-
-const close = document.getElementsByClassName("close");
-for (let i = 0; i < close.length; i++) {
-    close[i].onclick = function () {
-        this.parentElement.remove();
-    }
-}
-
-// const createTodoElement = (newTaskText) => {
-//     const taskText = newTaskText;
-//     const deleteButton = document.createElement('button');
-
-//     if (newTaskText.length <= 0) {
-//         alert("Please Enter Something...");
-//     } else {
-
-//     }
-// }
-// Add ToDo Item To the UL
+// Add the New Task To DOM
 function addTodo(newTaskName) {
     console.log("Add Task...");
 
@@ -76,4 +40,24 @@ function addTodo(newTaskName) {
     }
 }
 
+// Press Enter to Add Task
+document.getElementById("newInput").addEventListener('keypress',
+    event => {
+        if (event.keyCode === 13) {
+            this.addTodo(event.target.value);
+        }
+    });
 
+// Clicked the Task to Complete & Delete
+document.addEventListener('click',
+    event => {
+        // Complete the Task
+        if (event.target.tagName === "LI") {
+            event.target.classList.toggle('checked');
+            console.log(`"${event.target.textContent}" is clicked`);
+        }
+        // Delete the Task
+        if (event.target.tagName === "SPAN") {
+            event.target.parentElement.remove();
+        }
+    }, false);
