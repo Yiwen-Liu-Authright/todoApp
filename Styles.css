@@ -1,0 +1,94 @@
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-image: url("BackgroundVertical.jpg");
+    
+    background-color: whitesmoke;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    max-width: 780px;
+
+    padding-left: 70px;
+    padding-right: 70px; 
+}
+
+.container{
+    background-image: url(BrownPaperTexture.jpg);
+    opacity: 0.9;
+
+    width: 50%;
+    height: 50%;
+
+    margin: auto;
+
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    box-shadow: 1px 1px 1px gainsboro;
+    padding: 30px;
+}
+
+input{
+    border: none;
+    border-bottom: 2px solid;
+    outline: none;
+
+    height: 32px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    background-color: transparent;
+
+    width: 100%;
+    align-self: center;
+}
+
+input[type=text]:focus {
+    border-color: brown;
+}
+
+ul li {
+    cursor: pointer;
+    position: relative;
+    padding: 8px 8px 8px 20px;
+    list-style-type: none;
+    font-size: 18px;
+    transition: 0.7s;
+}
+
+ul li:hover {
+    color: brown;
+}
+
+ul li.checked {
+    color: brown;
+    text-decoration: line-through;
+}
+ul li.checked::before {
+    content: '';
+    position: absolute;
+    border-color: brown;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    top: 7px;
+    left: 0px;
+    transform: rotate(45deg);
+    height: 15px;
+    width: 7px;
+}
+
+.close {
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    right: 20px;
+    top: 0;
+    padding: 8px 8px 8px 8px;
+  }
+  
+.close:hover {
+    background-color: brown;
+    color: white;
+}
+  
+  
