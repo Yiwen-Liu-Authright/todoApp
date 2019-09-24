@@ -1,11 +1,13 @@
 body{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background-image: url("BackgroundVertical.jpg");
+    background: url("BackgroundVertical.jpg");
     
     background-color: whitesmoke;
 
     margin-left: auto;
     margin-right: auto;
+
+    font-weight: 300;
 
     max-width: 780px;
 
@@ -47,24 +49,30 @@ input[type=text]:focus {
     border-color: brown;
 }
 
-ul li {
+ul {
+    margin: 0px;
+    padding: 0px 22px 22px 22px;
+}
+
+li {
     cursor: pointer;
     position: relative;
-    padding: 8px 8px 8px 20px;
+    padding: 8px 8px 8px 8px;
     list-style-type: none;
     font-size: 18px;
+    font-weight: thin;
     transition: 0.7s;
 }
 
-ul li:hover {
+li:hover {
     color: brown;
 }
 
-ul li.checked {
+li.checked {
     color: brown;
     text-decoration: line-through;
 }
-ul li.checked::before {
+li.checked::before {
     content: '';
     position: absolute;
     border-color: brown;
@@ -77,18 +85,38 @@ ul li.checked::before {
     width: 7px;
 }
 
-.close {
-    background-color: transparent;
-    border: none;
+.deleteButton {
     position: absolute;
-    right: 20px;
-    top: 0;
-    padding: 8px 8px 8px 8px;
+    width: 22px;
+    /* top: 0px; */
+    right: 0px;
+    /* padding: 8px 8px 8px 8px; */
   }
   
-.close:hover {
+.deleteButton:hover {
     background-color: brown;
     color: white;
+}
+
+.btn-group {
+    width:100%;
+}
+.btn-group button {
+    background: transparent;
+    border: none;
+    /* border-bottom-color: brown; */
+    font-size: 18px;  
+    font-weight: 300;
+    padding: 8px;
+    margin-top: 8px;
+}
+.btn-group button:hover {
+    color:brown;
+}
+.btn-group button:focus{
+    background:brown;
+    color: white;
+    outline: none;
 }
   
   

@@ -1,7 +1,7 @@
 /*
  * @Comment: Yiwen Liu
  * @Date: 2019-09-19 18:44:08
- * @LastEditTime: 2019-09-20 16:47:02
+ * @LastEditTime: 2019-09-24 10:11:55
  * @Status: Inprocess
  * @Description: Each render <li> version
  */
@@ -51,12 +51,12 @@ document.getElementById("newInput").addEventListener('keypress',
 // Clicked the Task to Complete & Delete
 document.addEventListener('click',
     event => {
-        // Complete the Task
+        // Click to check the Task
         if (event.target.tagName === "LI") {
             event.target.classList.toggle('checked');
             console.log(`"${event.target.textContent}" is clicked`);
         }
-        // Delete the Task
+
         if (event.target.tagName === "SPAN") {
             event.target.parentElement.remove();
         }
