@@ -109,14 +109,14 @@ li.checked::before {
     font-weight: 300;
     padding: 8px;
     margin-top: 8px;
+    outline: none;
 }
 .btn-group button:hover {
     color:brown;
 }
-.btn-group button:focus{
+.btn-group button.clicked{
     background:brown;
     color: white;
-    outline: none;
 }
   
   

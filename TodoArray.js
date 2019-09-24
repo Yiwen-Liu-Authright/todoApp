@@ -1,7 +1,7 @@
 /*
  * @Comment: Yiwen Liu
  * @Date: 2019-09-20 17:03:20
- * @LastEditTime: 2019-09-24 10:14:55
+ * @LastEditTime: 2019-09-24 12:38:41
  * @Status: 
  * @Description: 
  */
@@ -18,7 +18,6 @@ const addTodo = (newtext) => {
 
     todoTask.push(todo);
     console.log(`finished push "${todo.text}" to the array`);
-    renderTodo();
 }
 
 const isChecked = (taskText) => {
@@ -42,9 +41,17 @@ const toggleChecked = (taskText) => {
     return false;
 }
 
-const renderTodo = () => {
-
-    console.log("Render todolist...");
+const renderController = () => {
+    const renderType = document.getElementsByClassName("clicked");
+    for (let i = 0; i < renderType.length; i++) {
+        if(renderType[i].textContent === "To Do") {
+            renderTodo();
+        }
+    }
+}
+// Render All
+const renderAll = () => {
+    console.log("Render All...");
     document.getElementById('renderedList').innerHTML = "";
     for (let i = 0; i < todoTask.length; i++) {
         const newTaskName = todoTask[i].text;
@@ -69,16 +76,81 @@ const renderTodo = () => {
         document.getElementById("renderedList").appendChild(newLIItem);
     }
 }
+// Render todo
+const renderTodo = () => {
+    console.log("Render Todo...");
+    document.getElementById('renderedList').innerHTML = "";
+    for (let i = 0; i < todoTask.length; i++) {
+        if (todoTask[i].checked === false) {
+            const newTaskName = todoTask[i].text;
+            const newLIItem = document.createElement('LI');
+            // Task Name
+            const taskNode = document.createTextNode(newTaskName);
+            newLIItem.appendChild(taskNode);
+            // Delete Button
+            const deleteButton = document.createElement("img");
+            deleteButton.src = "deleteButton.png";
+            deleteButton.className = "deleteButton";
+            newLIItem.appendChild(deleteButton);
+            // Maintain the rendered item className is Checked or not
+            if (isChecked(newTaskName) === true) {
+                console.log("HELLO");
+                newLIItem.className = "checked";
+            } else {
+                console.log("WORLD");
+                newLIItem.className = "";
+            }
+            // Append it to the UL
+            document.getElementById("renderedList").appendChild(newLIItem);
+        }
+    }
+}
+// render Compelete
+const renderCompeleted = () => {
+    console.log("Render Compeleted...");
+    document.getElementById('renderedList').innerHTML = "";
+    for (let i = 0; i < todoTask.length; i++) {
+        if (todoTask[i].checked === true) {
+            const newTaskName = todoTask[i].text;
+            const newLIItem = document.createElement('LI');
+            // Task Name
+            const taskNode = document.createTextNode(newTaskName);
+            newLIItem.appendChild(taskNode);
+            // Delete Button
+            const deleteButton = document.createElement("img");
+            deleteButton.src = "deleteButton.png";
+            deleteButton.className = "deleteButton";
+            newLIItem.appendChild(deleteButton);
+            // Maintain the rendered item className is Checked or not
+            if (isChecked(newTaskName) === true) {
+                console.log("HELLO");
+                newLIItem.className = "checked";
+            } else {
+                console.log("WORLD");
+                newLIItem.className = "";
+            }
+            // Append it to the UL
+            document.getElementById("renderedList").appendChild(newLIItem);
+        }
+    }
+}
+
+// Clear all the button class
+// const clearClicked = () => {
+
+// }
 
 // Generate the Initial List
 for (let i = 0; i < INITIALLIST.length; i++) {
     addTodo(INITIALLIST[i]);
+    renderController();
 }
 
 document.getElementById("newInput").addEventListener('keypress',
     event => {
         if (event.keyCode === 13) {
             addTodo(event.target.value);
+            renderController();
         }
     });
 
@@ -86,10 +158,25 @@ document.getElementById("renderedList").addEventListener('click',
     event => {
         if (event.target.tagName == "LI") {
             const currentTask = event.target;
-            currentTask.classList.toggle("checked");    
+            currentTask.classList.toggle("checked");
             console.log(`${currentTask.textContent} is toggled`);
             //toggleChecked(currentTask.textContent)
             console.log(`"${currentTask.textContent}" checked is ${toggleChecked(currentTask.textContent)}`); // why undefined
+            renderController();
+        }
+    });
+
+document.getElementById("btn-group").addEventListener('click',
+    event => {
+        if (event.target.textContent === "To Do") {
+            // event.target.className = "clicked";
+            renderTodo();
+        } else if (event.target.textContent === "Completed") {
+            // event.target.className = "clicked";
+            renderCompeleted();
+        } else {
+            // event.target.className = "clicked";
+            renderAll();
         }
     });
 
