@@ -1,7 +1,7 @@
 /*
  * @Comment: Yiwen Liu
  * @Date: 2019-09-20 17:03:20
- * @LastEditTime: 2019-09-24 12:38:41
+ * @LastEditTime: 2019-09-24 13:10:06
  * @Status: 
  * @Description: 
  */
@@ -46,6 +46,10 @@ const renderController = () => {
     for (let i = 0; i < renderType.length; i++) {
         if(renderType[i].textContent === "To Do") {
             renderTodo();
+        } else if (renderType[i].textContent === "Completed") {
+            renderCompeleted();
+        } else {
+            renderAll();
         }
     }
 }
@@ -136,9 +140,12 @@ const renderCompeleted = () => {
 }
 
 // Clear all the button class
-// const clearClicked = () => {
-
-// }
+const clearClicked = () => {
+    const clicked = document.getElementsByClassName("clicked");
+    for (let i = 0; i < clicked.length; i++) {
+        clicked[i].classList = " ";
+    }
+}
 
 // Generate the Initial List
 for (let i = 0; i < INITIALLIST.length; i++) {
@@ -150,6 +157,7 @@ document.getElementById("newInput").addEventListener('keypress',
     event => {
         if (event.keyCode === 13) {
             addTodo(event.target.value);
+            event.target.value = "";
             renderController();
         }
     });
@@ -168,14 +176,18 @@ document.getElementById("renderedList").addEventListener('click',
 
 document.getElementById("btn-group").addEventListener('click',
     event => {
-        if (event.target.textContent === "To Do") {
-            // event.target.className = "clicked";
+        if (event.target.textContent === "To Do") {  
+            clearClicked(); 
+            event.target.classList = "clicked";       
             renderTodo();
         } else if (event.target.textContent === "Completed") {
-            // event.target.className = "clicked";
+            clearClicked();
+            event.target.classList = "clicked";          
             renderCompeleted();
         } else {
-            // event.target.className = "clicked";
+            clearClicked();
+            event.target.classList = "clicked";
+            
             renderAll();
         }
     });
