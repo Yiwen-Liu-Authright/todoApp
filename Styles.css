@@ -4,12 +4,7 @@ body{
     
     background-color: whitesmoke;
 
-    margin-left: auto;
-    margin-right: auto;
-
     font-weight: 300;
-
-    max-width: 780px;
 
     padding-left: 70px;
     padding-right: 70px; 
@@ -18,9 +13,11 @@ body{
 .container{
     background-image: url(BrownPaperTexture.jpg);
     opacity: 0.9;
-
+    position: relative;
+    top: 70px;
     width: 50%;
     height: 50%;
+    width: 360px;
 
     margin: auto;
 
@@ -37,7 +34,7 @@ input{
 
     height: 32px;
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 500;
     text-align: center;
     background-color: transparent;
 
@@ -119,4 +116,10 @@ li.checked::before {
     color: white;
 }
   
-  
+footer {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    text-align: center;
+}

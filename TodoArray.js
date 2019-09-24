@@ -1,7 +1,7 @@
 /*
  * @Comment: Yiwen Liu
  * @Date: 2019-09-20 17:03:20
- * @LastEditTime: 2019-09-24 13:10:06
+ * @LastEditTime: 2019-09-24 14:00:58
  * @Status: 
  * @Description: 
  */
@@ -10,48 +10,73 @@ const INITIALLIST = ["Eat Dinner", "Wash Cloth", "Take Shower"];
 
 const todoTask = [];
 
-const addTodo = (newtext) => {
+const addTodo = (newText) => {
     const todo = {
-        text: newtext,
+        text: newText,
         checked: false,
     }
 
     todoTask.push(todo);
-    console.log(`finished push "${todo.text}" to the array`);
+    // console.log(`finished push "${todo.text}" to the array`);
+}
+const removeTodo = (removeText) => {
+    try {
+        for (let i = 0; i < todoTask.length; i++) {
+            console.log(`${todoTask[i].text} === ${removeText}`);
+            if (todoTask[i].text === removeText) {
+                todoTask.splice(i, 1);
+                return;
+            }
+        }
+        throw `Can't find the remove element "${removeText}"`;
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 const isChecked = (taskText) => {
-    for (let i = 0; i < todoTask.length; i++) {
-        if (todoTask[i].text === taskText) {
-            return todoTask[i].checked;
+    try {
+        for (let i = 0; i < todoTask.length; i++) {
+            if (todoTask[i].text === taskText) {
+                return todoTask[i].checked;
+            }
         }
+        throw "No Item in the list";
+    } catch (error) {
+        console.error(error);
     }
-    alert("No Item in the list");
+
     return false;
 }
 
 const toggleChecked = (taskText) => {
-    for (let i = 0; i < todoTask.length; i++) {
-        if (todoTask[i].text === taskText) {
-            todoTask[i].checked = !(todoTask[i].checked);
-            return todoTask[i].checked;
+    try {
+        for (let i = 0; i < todoTask.length; i++) {
+            if (todoTask[i].text === taskText) {
+                todoTask[i].checked = !(todoTask[i].checked);
+                return todoTask[i].checked;
+            }
         }
+        throw "Can't find the specific Item From the List";
+    } catch (error) {
+        console.error(error);
     }
-    alert("No Item in the list");
-    return false;
 }
 
 const renderController = () => {
     const renderType = document.getElementsByClassName("clicked");
-    for (let i = 0; i < renderType.length; i++) {
-        if(renderType[i].textContent === "To Do") {
-            renderTodo();
-        } else if (renderType[i].textContent === "Completed") {
-            renderCompeleted();
-        } else {
-            renderAll();
+    try {
+        for (let i = 0; i < renderType.length; i++) {
+            if (renderType[i].textContent === "To Do") {
+                renderTodo();
+            } else if (renderType[i].textContent === "Completed") {
+                renderCompeleted();
+            } else if (renderType[i].textContent === "All") {
+                renderAll();
+            } else { throw "Invalid button"; }
         }
-    }
+    } catch (error) { console.error(error); }
+
 }
 // Render All
 const renderAll = () => {
@@ -70,10 +95,8 @@ const renderAll = () => {
         newLIItem.appendChild(deleteButton);
         // Maintain the rendered item className is Checked or not
         if (isChecked(newTaskName) === true) {
-            console.log("HELLO");
             newLIItem.className = "checked";
         } else {
-            console.log("WORLD");
             newLIItem.className = "";
         }
         // Append it to the UL
@@ -98,10 +121,8 @@ const renderTodo = () => {
             newLIItem.appendChild(deleteButton);
             // Maintain the rendered item className is Checked or not
             if (isChecked(newTaskName) === true) {
-                console.log("HELLO");
                 newLIItem.className = "checked";
             } else {
-                console.log("WORLD");
                 newLIItem.className = "";
             }
             // Append it to the UL
@@ -127,10 +148,8 @@ const renderCompeleted = () => {
             newLIItem.appendChild(deleteButton);
             // Maintain the rendered item className is Checked or not
             if (isChecked(newTaskName) === true) {
-                console.log("HELLO");
                 newLIItem.className = "checked";
             } else {
-                console.log("WORLD");
                 newLIItem.className = "";
             }
             // Append it to the UL
@@ -147,7 +166,7 @@ const clearClicked = () => {
     }
 }
 
-// Generate the Initial List
+// Generate the Initial List to Test
 for (let i = 0; i < INITIALLIST.length; i++) {
     addTodo(INITIALLIST[i]);
     renderController();
@@ -155,40 +174,57 @@ for (let i = 0; i < INITIALLIST.length; i++) {
 
 document.getElementById("newInput").addEventListener('keypress',
     event => {
-        if (event.keyCode === 13) {
-            addTodo(event.target.value);
-            event.target.value = "";
-            renderController();
+        try {
+            if (event.keyCode === 13) {
+                if (event.target.value == "") {
+                    throw "Task name can't be empty";
+                } else {
+                    addTodo(event.target.value);
+                    event.target.value = "";
+                    renderController();
+                }
+            }
+        } catch (error) {
+            alert(error);
         }
     });
 
 document.getElementById("renderedList").addEventListener('click',
     event => {
-        if (event.target.tagName == "LI") {
-            const currentTask = event.target;
-            currentTask.classList.toggle("checked");
-            console.log(`${currentTask.textContent} is toggled`);
-            //toggleChecked(currentTask.textContent)
-            console.log(`"${currentTask.textContent}" checked is ${toggleChecked(currentTask.textContent)}`); // why undefined
-            renderController();
+        const currentTask = event.target;
+        try {
+            if (currentTask.tagName === "LI") {
+                currentTask.classList.toggle("checked");
+                toggleChecked(currentTask.textContent);
+                //console.log(`"${currentTask.textContent}" checked is ${toggleChecked(currentTask.textContent)}`); // why undefined
+                renderController();
+            } else if (currentTask.tagName === "IMG") {
+                removeTodo(currentTask.parentElement.textContent);
+                renderController();
+            } else { throw "Invalid Elements"; }
+        } catch (error) {
+            console.error(error);
         }
     });
 
 document.getElementById("btn-group").addEventListener('click',
     event => {
-        if (event.target.textContent === "To Do") {  
-            clearClicked(); 
-            event.target.classList = "clicked";       
-            renderTodo();
-        } else if (event.target.textContent === "Completed") {
-            clearClicked();
-            event.target.classList = "clicked";          
-            renderCompeleted();
-        } else {
-            clearClicked();
-            event.target.classList = "clicked";
-            
-            renderAll();
+        try {
+            if (event.target.textContent === "To Do") {
+                clearClicked();
+                event.target.classList = "clicked";
+                renderTodo();
+            } else if (event.target.textContent === "Completed") {
+                clearClicked();
+                event.target.classList = "clicked";
+                renderCompeleted();
+            } else if (event.target.textContent === "All") {
+                clearClicked();
+                event.target.classList = "clicked";
+                renderAll();
+            } else { throw "Invalid Button" }
+        } catch (error) {
+            console.error(error);
         }
     });
 
