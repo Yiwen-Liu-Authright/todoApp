@@ -13,18 +13,31 @@ body{
 .container{
     background-image: url(BrownPaperTexture.jpg);
     opacity: 0.9;
-    position: relative;
+    position: fixed;
     top: 70px;
-    width: 50%;
-    height: 50%;
-    width: 360px;
-
     margin: auto;
-
+    width: 50%;
+    min-width: 30vh;
+    max-width: 50vh;
+    max-height: 70vh;
+    margin: auto;
     border: 1px solid #ccc;
     border-radius: 25px;
     box-shadow: 1px 1px 1px gainsboro;
     padding: 30px;
+}
+
+.ulcontainer{
+    background: transparent;
+    position: relative;
+    /* top: 70px; */
+    margin: auto;
+    /* bottom: 70px; */
+    /* width: 100%; */
+    max-height: 45vh;
+    overflow: scroll;
+    /* max-width: 360px; */
+    margin: auto;
 }
 
 input{
@@ -37,7 +50,6 @@ input{
     font-weight: 500;
     text-align: center;
     background-color: transparent;
-
     width: 100%;
     align-self: center;
 }
@@ -48,7 +60,7 @@ input[type=text]:focus {
 
 ul {
     margin: 0px;
-    padding: 0px 22px 22px 22px;
+    padding: 22px 22px 0px 22px;
 }
 
 li {
@@ -91,8 +103,8 @@ li.checked::before {
   }
   
 .deleteButton:hover {
-    background-color: brown;
-    color: white;
+    filter: invert(90%);
+    
 }
 
 .btn-group {
@@ -117,7 +129,7 @@ li.checked::before {
 }
   
 footer {
-    position: absolute;
+    position: fixed;
     left: 0px;
     bottom: 0px;
     width: 100%;

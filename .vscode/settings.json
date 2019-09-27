@@ -1,8 +1,8 @@
 {
     "terminal.integrated.fontFamily": "Hack Nerd Font",
     "terminal.integrated.fontSize": 12,
-    "workbench.colorCustomizations" : {
-        "terminal.foreground" : "#FEFBEC",
-        "terminal.background" : "#6E6B5E"
-    }
+    // "workbench.colorCustomizations" : {
+    //     "terminal.foreground" : "#FEFBEC",
+    //     "terminal.background" : "#6E6B5E"
+    // }
 }
