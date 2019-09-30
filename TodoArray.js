@@ -1,7 +1,7 @@
 /*
  * @Comment: Yiwen Liu
  * @Date: 2019-09-20 17:03:20
- * @LastEditTime: 2019-09-24 14:00:58
+ * @LastEditTime: 2019-09-25 16:37:30
  * @Status: 
  * @Description: 
  */
@@ -227,6 +227,3 @@ document.getElementById("btn-group").addEventListener('click',
             console.error(error);
         }
     });
-
-
-
