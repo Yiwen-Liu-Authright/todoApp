@@ -1,7 +1,7 @@
 /*
  * @Comment: Yiwen Liu
  * @Date: 2019-09-20 17:03:20
- * @LastEditTime: 2019-09-25 16:37:30
+ * @LastEditTime: 2019-09-27 10:17:40
  * @Status: 
  * @Description: 
  */
@@ -16,7 +16,7 @@ const addTodo = (newText) => {
         checked: false,
     }
 
-    todoTask.push(todo);
+    todoTask.unshift(todo);
     // console.log(`finished push "${todo.text}" to the array`);
 }
 const removeTodo = (removeText) => {
