@@ -1,6 +1,6 @@
 body{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background: url("./asserts/BackgroundVertical.jpg");
+    background: url("./assets/BackgroundVertical.jpg");
     background-attachment: fixed;
     background-color: whitesmoke;
 
@@ -11,7 +11,7 @@ body{
 }
 
 .container{
-    background-image: url(./asserts/BrownPaperTexture.jpg);
+    background-image: url(./assets/BrownPaperTexture.jpg);
     opacity: 0.9;
     position: fixed;
     top: 70px;
