@@ -1,7 +1,7 @@
 /*
  * @Comment: Yiwen Liu
  * @Date: 2019-09-20 17:03:20
- * @LastEditTime: 2019-09-27 10:17:40
+ * @LastEditTime: 2019-10-07 17:33:38
  * @Status: 
  * @Description: 
  */
@@ -90,7 +90,7 @@ const renderAll = () => {
         newLIItem.appendChild(taskNode);
         // Delete Button
         const deleteButton = document.createElement("img");
-        deleteButton.src = "deleteButton.png";
+        deleteButton.src = "./asserts/deleteButton.png";
         deleteButton.className = "deleteButton";
         newLIItem.appendChild(deleteButton);
         // Maintain the rendered item className is Checked or not
@@ -116,7 +116,7 @@ const renderTodo = () => {
             newLIItem.appendChild(taskNode);
             // Delete Button
             const deleteButton = document.createElement("img");
-            deleteButton.src = "deleteButton.png";
+            deleteButton.src = "./asserts/deleteButton.png";
             deleteButton.className = "deleteButton";
             newLIItem.appendChild(deleteButton);
             // Maintain the rendered item className is Checked or not
@@ -143,7 +143,7 @@ const renderCompeleted = () => {
             newLIItem.appendChild(taskNode);
             // Delete Button
             const deleteButton = document.createElement("img");
-            deleteButton.src = "deleteButton.png";
+            deleteButton.src = "./asserts/deleteButton.png";
             deleteButton.className = "deleteButton";
             newLIItem.appendChild(deleteButton);
             // Maintain the rendered item className is Checked or not
