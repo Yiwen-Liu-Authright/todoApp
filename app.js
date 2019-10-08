@@ -1,10 +1,12 @@
 /*
  * @Comment: Yiwen Liu
  * @Date: 2019-09-20 17:03:20
- * @LastEditTime: 2019-10-07 17:42:12
+ * @LastEditTime: 2019-10-08 14:57:14
  * @Status: 
  * @Description: 
  */
+
+import { renderAll, renderTodo, renderCompeleted } from "./render.js";
 
 const INITIALLIST = ["Eat Dinner", "Wash Cloth", "Take Shower"];
 
@@ -34,21 +36,6 @@ const removeTodo = (removeText) => {
     }
 }
 
-const isChecked = (taskText) => {
-    try {
-        for (let i = 0; i < todoTask.length; i++) {
-            if (todoTask[i].text === taskText) {
-                return todoTask[i].checked;
-            }
-        }
-        throw "No Item in the list";
-    } catch (error) {
-        console.error(error);
-    }
-
-    return false;
-}
-
 const toggleChecked = (taskText) => {
     try {
         for (let i = 0; i < todoTask.length; i++) {
@@ -68,94 +55,15 @@ const renderController = () => {
     try {
         for (let i = 0; i < renderType.length; i++) {
             if (renderType[i].textContent === "To Do") {
-                renderTodo();
+                renderTodo(todoTask);
             } else if (renderType[i].textContent === "Completed") {
-                renderCompeleted();
+                renderCompeleted(todoTask);
             } else if (renderType[i].textContent === "All") {
-                renderAll();
+                renderAll(todoTask);
             } else { throw "Invalid button"; }
         }
     } catch (error) { console.error(error); }
 
-}
-// Render All
-const renderAll = () => {
-    console.log("Render All...");
-    document.getElementById('renderedList').innerHTML = "";
-    for (let i = 0; i < todoTask.length; i++) {
-        const newTaskName = todoTask[i].text;
-        const newLIItem = document.createElement('LI');
-        // Task Name
-        const taskNode = document.createTextNode(newTaskName);
-        newLIItem.appendChild(taskNode);
-        // Delete Button
-        const deleteButton = document.createElement("img");
-        deleteButton.src = "./assets/deleteButton.png";
-        deleteButton.className = "deleteButton";
-        newLIItem.appendChild(deleteButton);
-        // Maintain the rendered item className is Checked or not
-        if (isChecked(newTaskName) === true) {
-            newLIItem.className = "checked";
-        } else {
-            newLIItem.className = "";
-        }
-        // Append it to the UL
-        document.getElementById("renderedList").appendChild(newLIItem);
-    }
-}
-// Render todo
-const renderTodo = () => {
-    console.log("Render Todo...");
-    document.getElementById('renderedList').innerHTML = "";
-    for (let i = 0; i < todoTask.length; i++) {
-        if (todoTask[i].checked === false) {
-            const newTaskName = todoTask[i].text;
-            const newLIItem = document.createElement('LI');
-            // Task Name
-            const taskNode = document.createTextNode(newTaskName);
-            newLIItem.appendChild(taskNode);
-            // Delete Button
-            const deleteButton = document.createElement("img");
-            deleteButton.src = "./assets/deleteButton.png";
-            deleteButton.className = "deleteButton";
-            newLIItem.appendChild(deleteButton);
-            // Maintain the rendered item className is Checked or not
-            if (isChecked(newTaskName) === true) {
-                newLIItem.className = "checked";
-            } else {
-                newLIItem.className = "";
-            }
-            // Append it to the UL
-            document.getElementById("renderedList").appendChild(newLIItem);
-        }
-    }
-}
-// render Compelete
-const renderCompeleted = () => {
-    console.log("Render Compeleted...");
-    document.getElementById('renderedList').innerHTML = "";
-    for (let i = 0; i < todoTask.length; i++) {
-        if (todoTask[i].checked === true) {
-            const newTaskName = todoTask[i].text;
-            const newLIItem = document.createElement('LI');
-            // Task Name
-            const taskNode = document.createTextNode(newTaskName);
-            newLIItem.appendChild(taskNode);
-            // Delete Button
-            const deleteButton = document.createElement("img");
-            deleteButton.src = "./assets/deleteButton.png";
-            deleteButton.className = "deleteButton";
-            newLIItem.appendChild(deleteButton);
-            // Maintain the rendered item className is Checked or not
-            if (isChecked(newTaskName) === true) {
-                newLIItem.className = "checked";
-            } else {
-                newLIItem.className = "";
-            }
-            // Append it to the UL
-            document.getElementById("renderedList").appendChild(newLIItem);
-        }
-    }
 }
 
 // Clear all the button class
@@ -213,15 +121,15 @@ document.getElementById("btn-group").addEventListener('click',
             if (event.target.textContent === "To Do") {
                 clearClicked();
                 event.target.classList = "clicked";
-                renderTodo();
+                renderTodo(todoTask);
             } else if (event.target.textContent === "Completed") {
                 clearClicked();
                 event.target.classList = "clicked";
-                renderCompeleted();
+                renderCompeleted(todoTask);
             } else if (event.target.textContent === "All") {
                 clearClicked();
                 event.target.classList = "clicked";
-                renderAll();
+                renderAll(todoTask);
             } else { throw "Invalid Button" }
         } catch (error) {
             console.error(error);
