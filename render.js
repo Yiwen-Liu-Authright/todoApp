@@ -1,6 +1,5 @@
 // Render All
 export const renderAll = (todoTask) => {
-    console.log("Render All...");
     document.getElementById('renderedList').innerHTML = "";
     for (let i = 0; i < todoTask.length; i++) {
         // Create and Li Item
@@ -10,38 +9,6 @@ export const renderAll = (todoTask) => {
         toggleChecked(todoTask, newTaskName, newLIItem);
         // Append it to the UL
         document.getElementById("renderedList").appendChild(newLIItem);
-    }
-}
-// Render todo
-export const renderTodo = (todoTask) => {
-    console.log("Render Todo...");
-    document.getElementById('renderedList').innerHTML = "";
-    for (let i = 0; i < todoTask.length; i++) {
-        if (todoTask[i].checked === false) {
-            // Create an Li Item
-            const newTaskName = todoTask[i].text;
-            const newLIItem = createLIItem(newTaskName);
-            // Maintain the rendered item className is Checked or not
-            toggleChecked(todoTask, newTaskName, newLIItem);
-            // Append it to the UL
-            document.getElementById("renderedList").appendChild(newLIItem);
-        }
-    }
-}
-// render Compelete
-export const renderCompeleted = (todoTask) => {
-    console.log("Render Compeleted...");
-    document.getElementById('renderedList').innerHTML = "";
-    for (let i = 0; i < todoTask.length; i++) {
-        if (todoTask[i].checked === true) {
-            // Create an Li elements
-            const newTaskName = todoTask[i].text;
-            const newLIItem = createLIItem(newTaskName);
-            // Maintain the rendered item className is Checked or not
-            toggleChecked(todoTask, newTaskName, newLIItem);
-            // Append it to the UL
-            document.getElementById("renderedList").appendChild(newLIItem);
-        }
     }
 }
 
