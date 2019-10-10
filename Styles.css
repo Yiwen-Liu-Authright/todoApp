@@ -10,8 +10,30 @@ body{
     padding-right: 70px; 
 }
 
+.save {
+    /* align-self: center; */
+    /* margin-right: 0px; */
+    align-self: center;
+    width: 90%;
+    background: transparent;
+    border-radius: 25px;
+    border: 2px solid gray;
+    color: gray;
+    font-size: 18px;  
+    font-weight: 500;
+    padding: 8px;
+    outline: none;
+}
+.save:hover {
+    /* background-color: brown; */
+    border: 2px solid brown;
+    color: brown;
+}
+
 .container{
     background-image: url(./assets/BrownPaperTexture.jpg);
+    display: flex;
+    flex-direction: column;
     opacity: 0.9;
     position: fixed;
     top: 70px;
@@ -29,15 +51,8 @@ body{
 
 .ulcontainer{
     background: transparent;
-    position: relative;
-    /* top: 70px; */
-    margin: auto;
-    /* bottom: 70px; */
-    /* width: 100%; */
     max-height: 45vh;
     overflow: scroll;
-    /* max-width: 360px; */
-    margin: auto;
 }
 
 input{
@@ -60,7 +75,7 @@ input[type=text]:focus {
 
 ul {
     margin: 0px;
-    padding: 22px 22px 0px 22px;
+    padding: 22px 22px 22px 22px;
 }
 
 li {

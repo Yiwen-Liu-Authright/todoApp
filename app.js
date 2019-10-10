@@ -1,40 +1,33 @@
 /*
  * @Comment: Yiwen Liu
  * @Date: 2019-09-20 17:03:20
- * @LastEditTime: 2019-10-08 17:39:09
+ * @LastEditTime: 2019-10-10 18:03:34
  * @Status: 
  * @Description: 
  */
 
 import { renderAll } from "./render.js";
+import todos from './todos.js';
 
-const INITIALLIST = ["Eat Dinner", "Wash Cloth", "Take Shower"];
+// const INITIALLIST = ["Eat Dinner", "Wash Cloth", "Take Shower"];
+const { addTodo, getTodos, deleteTodo, fetchTodos, postTodos } = todos();
 
-const todoTask = [];
+let todoTask = [];
+fetchRemoteData();
+// console.log(todoTask);
+// rerender();
 
-const addTodo = (newText) => {
-    const todo = {
-        text: newText,
-        checked: false,
-    }
-    todoTask.unshift(todo);
-}
-const removeTodo = (removeText) => {
-    try {
-        for (let i = 0; i < todoTask.length; i++) {
-            console.log(`${todoTask[i].text} === ${removeText}`);
-            if (todoTask[i].text === removeText) {
-                todoTask.splice(i, 1);
-                return;
-            }
-        }
-        throw `Can't find the remove element "${removeText}"`;
-    } catch (error) {
-        console.error(error);
-    }
+async function fetchRemoteData() {
+    await fetchTodos();
+    todoTask = getTodos();
+    rerender();
 }
 
-const rerender = () => {
+async function postRemoteData() {
+    await postTodos();
+}
+
+function rerender() {
     const renderType = document.getElementsByClassName("clicked")[0];
     try {
         //console.log(renderType);
@@ -56,11 +49,7 @@ const rerender = () => {
 
 }
 
-// Generate the Initial List to Test
-for (let i = 0; i < INITIALLIST.length; i++) {
-    addTodo(INITIALLIST[i]);
-    rerender();
-}
+
 
 document.getElementById("newInput").addEventListener('keypress',
     event => {
@@ -81,21 +70,27 @@ document.getElementById("newInput").addEventListener('keypress',
 
 document.getElementById("renderedList").addEventListener('click',
     event => {
-        const currentTask = event.target;
+        const clicked = event.target;
         try {
-            if (currentTask.tagName === "LI") {
-                currentTask.classList.toggle("checked");
-                toggleChecked(currentTask.textContent);
+            if (clicked.tagName === "LI") {
+                clicked.classList.toggle("checked");
+                toggleChecked(clicked.textContent);
                 //console.log(`"${currentTask.textContent}" checked is ${toggleChecked(currentTask.textContent)}`); // why undefined
                 rerender();
-            } else if (currentTask.tagName === "IMG") {
-                removeTodo(currentTask.parentElement.textContent);
+            } else if (clicked.tagName === "IMG") {
+                deleteTodo(clicked.parentElement.textContent);
                 rerender();
             } else { throw "Invalid Elements"; }
         } catch (error) {
             console.error(error);
         }
     });
+
+document.getElementById("save").addEventListener('click',
+    event => {
+        postRemoteData();
+    })
+
 const toggleChecked = (taskText) => {
     try {
         for (let i = 0; i < todoTask.length; i++) {
