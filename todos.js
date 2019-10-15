@@ -1,18 +1,6 @@
 //  const todos = (initialList) => {
 export default () => {
     let todos = [];
-    // initialTodos(initialList);
-    // let data = fetchTodos();
-    // fetchTodos().then(data => todos = data);
-    // console.log(todos);
-    //postTodos();
-
-    // Generate the Initial List to Test
-    // const initialTodos = (initialList) => {
-    //     for (let i = 0; i < INITIALLIST.length; i++) {
-    //         addTodo(initialList[i]);
-    //     }
-    // }
 
     function addTodo(newText) {
         const todo = {

@@ -1,5 +1,27 @@
+export const rerender = (todoTask) => {
+    const renderType = document.getElementsByClassName("currentFilter")[0];
+    try {
+        //console.log(renderType);
+        let finalArr = [];
+        if (renderType.textContent === "To Do") {
+            finalArr = todoTask.filter((todo) => {
+                return todo.checked === false
+            })
+        } else if (renderType.textContent === "Completed") {
+            finalArr = todoTask.filter((todo) => {
+                return todo.checked === true
+            })
+        } else if (renderType.textContent === "All") {
+            finalArr = todoTask
+        } else { console.error("Invalid button"); }
+
+        renderAll(finalArr);
+        
+    } catch (error) { console.error(error); }
+}
+
 // Render All
-export const renderAll = (todoTask) => {
+const renderAll = (todoTask) => {
     document.getElementById('renderedList').innerHTML = "";
     for (let i = 0; i < todoTask.length; i++) {
         // Create and Li Item
